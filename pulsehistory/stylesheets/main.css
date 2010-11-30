@@ -1,0 +1,11 @@
+body {
+  font-family: Verdana, Helvetica, sans-serif;
+  background-color: #DDDDDD;
+}
+
+span.pulse {color:#8F0000;}
+a.date:link {text-decoration:none; color:#000000;}
+a.date:visited { text-decoration:none;  color:#444; }
+a.date:hover { text-decoration:none;  background-color:#ff0; }
+a.date:active { text-decoration:none;  background-color:#cff; }
+a.date:focus { text-decoration:none;  background-color:#080; }

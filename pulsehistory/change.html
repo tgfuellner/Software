@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+      <H1>Change Pulse Entry</i> </H1>
+    <br>
+
+    <form action="/edit" method="post">
+      <input type="hidden" name="id" value="{{pulse.key}}">
+      <table border="0" cellpading="4">
+          <tr>
+          <td><input name="date" type="text" value="{{pulse.date|date:"Y-m-d H:i"}}" size="16" maxlength="16"></td>
+          </tr><tr>
+          <td>
+              <input type="button" name="b2" value="&nbsp;-&nbsp;" onclick="this.form.pulse.value--">
+              <input name="pulse" type="text" value="{{pulse.pulse}}" size="3" maxlength="3">
+              <input type="button" name="b1" value="&nbsp;+&nbsp;" onclick="this.form.pulse.value++">
+          </td>
+          </tr><tr>
+          <td><input name="remark" type="text" value="{{pulse.remark}}" size="60" maxlengt="120"></td>
+          </tr>
+          <tr>
+          <td><button type="submit" value="Change Pulse">
+            <img src="/img/note_edit.png" align="middle" alt="Submit">Change
+            </button></td>
+          </tr>
+       </table>
+    </form>
+    <hr>
+    <a href="delete?id={{pulse.key}}"><img src="/img/note_delete.png"  border="0" alt="delete">Delete Entry</a>
+
+  </body>
+</html>

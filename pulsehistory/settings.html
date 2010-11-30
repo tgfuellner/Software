@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+      <H1>Settings of {{User}}</i> </H1>
+    <br>
+    <form action="/setUserConfig" method="post">
+        Timezone offset in hours:
+        <input name="tzoffset" type="text" value="{{tzOffsetHour}}" size="2" maxlength="2">
+        <p>
+        Number of history lines:
+        <input name="pageSize" type="text" value="{{pageSize}}" size="3" maxlength="3">
+        <p>
+        <button type="submit" value="Set User Config">
+            <img src="/img/note_edit.png" align="middle" alt="Submit">Change
+        </button>
+    </form>
+  </body>
+</html>

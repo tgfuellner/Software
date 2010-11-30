@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+      <H1>Puls History of <i>{{ User }}</i> </H1>
+      {% if showSettingsLink %}
+      <a href="/settings">Settings</a>
+      {% endif %}
+      <a href="{{ url }}">{{ url_linktext }}</a>
+    <br>
+    <hr>
+
+    <form action="/insert" method="post">
+      <table border="0" cellpading="4">
+          <tr>
+          <td><input name="date" type="text" value="{{date|date:"Y-m-d H:i"}}" size="16" maxlength="16"></td>
+          </tr><tr>
+          <td>
+              <input type="button" name="b2" value="&nbsp;-&nbsp;" onclick="this.form.pulse.value--">
+              <input name="pulse" type="text" value="{{lastPulse}}" size="3" maxlength="3">
+              <input type="button" name="b1" value="&nbsp;+&nbsp;" onclick="this.form.pulse.value++">
+          </td>
+          </tr><tr>
+          <td><input name="remark" type="text" size="60" maxlengt="120"></td>
+          </tr>
+          <tr>
+          <td><button type="submit" value="Add Pulse">
+            <img src="/img/note_add.png" align="middle" alt="Submit">Add
+            </button></td>
+          </tr>
+       </table>
+    </form>
+    <hr>
+
+   {% for pulse in pulses %}
+    <a class="date" href="change?id={{pulse.key}}"> {{pulse.date|date:"Y-m-d H:i"}}</a>
+    <span class="pulse">{{ pulse.pulse }}</span>
+    {{ pulse.remark|escape }} <br>
+   {% endfor %}
+   {% if nextPage %}
+    <p><a href="?page=0">Top</a>
+    <a href="?page={{ nextPage }}">Next</a></p>        
+   {% endif %}
+  </body>
+</html>
