@@ -9,11 +9,11 @@ if exists("b:current_syntax")
 endif
 
 " A bunch of useful C keywords
-syn keyword	cStatement	module Usage echo return
-syn keyword	cLabel		difference union intersection projection linear_extrude rotate_extrude
+syn keyword	cStatement	module use echo return
+syn keyword	cLabel		difference union intersection projection linear_extrude rotate_extrude color
 syn keyword	cType		translate rotate
 syn keyword	cFormat		cube spere cylinder polyhedron square circle polygon
-syn keyword	cString		size center
+syn keyword	cStructure	size center
 syn keyword	cFloat		false true
 syn keyword	cConditional	if else switch
 syn keyword	cRepeat		for intersection_for
@@ -194,7 +194,6 @@ if exists("c_gnu")
   syn keyword	cType		__label__ __complex__ __volatile__
 endif
 
-syn keyword	cStructure	struct union enum typedef
 syn keyword	cStorageClass	static register auto volatile extern const
 if exists("c_gnu")
   syn keyword	cStorageClass	inline __attribute__
