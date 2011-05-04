@@ -231,7 +231,7 @@ read_pgm(FILE * f)
   fscanf(f, "%d", &y);
   fscanf(f, "%d", &range);
   if (range != 255) {
-    fprintf(stderr, "Sorry, can only handle 8-bit images for now.\n");
+    fprintf(stderr, "Schau in den Header! Sorry, can only handle 8-bit images for now.\n");
     exit(1);
   }
 
