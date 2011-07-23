@@ -23,4 +23,4 @@ For no good reason, it is assumed that 0 (black) in the image is the maximum cut
 It's assumed that Z=0 is the top surface of the work material.
 
 Anderes Beispiel:
-./imagecarve --toolsize=2 --stepover=0.7 --scale=0.25 --clear=5 --zdepth=5 GruppeGrau.pgm >GruppeGrau.tap
+./imagecarve --toolsize=2 --stepover=0.7 --scale=0.25 --clear=5 --zdepth=5 --zoffset=-1 GruppeGrau.pgm >GruppeGrau.tap

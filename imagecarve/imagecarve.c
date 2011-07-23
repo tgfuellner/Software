@@ -11,6 +11,7 @@ double tool_radius = 1.6;	// mm. radius of ball nose cutting tool.
 double stepover = 1;
 double max_cut = 8;		// mm. Max plunge depth.
 double zscale = 8;              // mm. Depth of image.
+double z_displace = 0.0;  // Z-offset
 double max_error = 0.01;	// mm
 double clear = 2;		// clearance Z-height. Top of work is assumed to be zero.
 double res = 0.5;		// Sampling size in mm.
@@ -151,7 +152,7 @@ min_height(I * img, double tx, double ty, double tradius)
     }
   }
 
-  return z;
+  return z+z_displace;
 }
 
 void
@@ -280,6 +281,7 @@ main(int argc, char *argv[])
     {"toolsize", required_argument, 0, 't'},
     {"stepover", required_argument, 0, 'p'},
     {"zdepth", required_argument, 0, 'z'},
+    {"zoffset", required_argument, 0, 'o'},
     {"scale", required_argument, 0, 's'},
     {"clear", required_argument, 0, 'c'},
     {0, 0, 0, 0}
@@ -310,6 +312,10 @@ main(int argc, char *argv[])
 
     case 'z':
       zscale = atof(optarg);
+      break;
+
+    case 'o':
+      z_displace = atof(optarg);
       break;
 
     case 's':
