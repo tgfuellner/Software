@@ -24,3 +24,5 @@ It's assumed that Z=0 is the top surface of the work material.
 
 Anderes Beispiel:
 ./imagecarve --toolsize=2 --stepover=0.7 --scale=0.25 --clear=5 --zdepth=5 --zoffset=-1 GruppeGrau.pgm >GruppeGrau.tap
+
+Vorsicht: Vertikal Spiegeln; sonst ist Schrift verhaut!!
