@@ -11,6 +11,8 @@ double tool_radius = 1.6;	// mm. radius of ball nose cutting tool.
 double stepover = 1;
 double max_cut = 8;		// mm. Max plunge depth.
 double zscale = 8;              // mm. Depth of image.
+double x_displace = 0.0;  // X-offset
+double y_displace = 0.0;  // Y-offset
 double z_displace = 0.0;  // Z-offset
 double max_error = 0.01;	// mm
 double clear = 2;		// clearance Z-height. Top of work is assumed to be zero.
@@ -48,7 +50,7 @@ projection_error(double x, double y, double z)
 void
 do_route_to(double x, double y, double z)
 {
-  printf("G01X%.2fY%.2fZ%.2f\n", x, y, z);
+  printf("G01X%.2fY%.2fZ%.2f\n", x+x_displace, y+y_displace, z);
   mx = x;
   my = y;
   mz = z;
@@ -94,7 +96,7 @@ void
 move_to(double x, double y, double z)
 {
   finish();
-  printf("G00X%.2fY%.2fZ%.2f\n", x, y, z);
+  printf("G00X%.2fY%.2fZ%.2f\n", x+x_displace, y+y_displace, z);
   mx = x;
   my = y;
   mz = z;
@@ -281,6 +283,8 @@ main(int argc, char *argv[])
     {"toolsize", required_argument, 0, 't'},
     {"stepover", required_argument, 0, 'p'},
     {"zdepth", required_argument, 0, 'z'},
+    {"xoffset", required_argument, 0, 'x'},
+    {"yoffset", required_argument, 0, 'y'},
     {"zoffset", required_argument, 0, 'o'},
     {"scale", required_argument, 0, 's'},
     {"clear", required_argument, 0, 'c'},
@@ -292,7 +296,7 @@ main(int argc, char *argv[])
     int option_index = 0;
 
     char c =
-      getopt_long(argc, argv, "t:p:z:s:c:", long_options, &option_index);
+      getopt_long(argc, argv, "t:p:z:x:y:o:s:c:", long_options, &option_index);
 
     /* Detect the end of the options. */
     if (c == -1)
@@ -314,6 +318,14 @@ main(int argc, char *argv[])
       zscale = atof(optarg);
       break;
 
+    case 'x':
+      x_displace = atof(optarg);
+      break;
+
+    case 'y':
+      y_displace = atof(optarg);
+      break;
+
     case 'o':
       z_displace = atof(optarg);
       break;
@@ -324,9 +336,18 @@ main(int argc, char *argv[])
 
     case 'c':
       clear = atof(optarg);
+      break;
 
     case '?':
-      /* getopt_long already printed an error message. */
+    case 'h':
+      {
+          int i;
+          fprintf(stderr, "Options:\n");
+          for (i=1; long_options[i].name; i++) {
+            fprintf(stderr, "  --%s\n", long_options[i].name);
+          }
+          abort();
+      }
       break;
 
     default:
@@ -354,7 +375,7 @@ main(int argc, char *argv[])
 
   I *img = read_pgm(f);
   fprintf(stderr, "Image size: %d x %d\n", img->xsize, img->ysize);
-  fprintf(stderr, "Output till be %.1fmm x %.1fmm\n", res * img->xsize,
+  fprintf(stderr, "Output will be %.1fmm x %.1fmm\n", res * img->xsize,
 	  res * img->ysize);
   img->res = res;
   cross_render_image(img, res * img->xsize, res * img->ysize, stepover);

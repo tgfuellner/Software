@@ -1,10 +1,12 @@
 #!/bin/sh
 #
 
+#DB=/home/thomas/PV/singlePV.db
 DB=/mnt/sd/PV/singlePV.db
 
 DATE=${1:-$(date  "+%Y-%m-%d")}
 DATEHM=${1:-$(date  "+%Y-%m-%d %H:%M:%S")}
+DAYBEFORE=$(date "+%Y-%m-%d" --date "$DATE - 1 day")
 
 GESAMT=$(sqlite3 $DB "select max(dayTotalE) from single_measures where dateTime like '$DATE%'")
 SAMPLES=$(sqlite3 $DB "select count(*) from single_measures where dateTime like '$DATE%'")
@@ -30,5 +32,6 @@ set format x "%H:%M"
 #set xrange ["11:50":"12:00"]
 set xtics 1800
 plot '< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc1u*dc1i from single_measures where dateTime like ''$DATE%'' order by dateTime"' using 1:2 title "Garage String1" with lines, \
-'< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc2u*dc2i from single_measures where dateTime like ''$DATE%'' order by dateTime"' using 1:2 title "Schuppen String2" with lines
+'< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc2u*dc2i from single_measures where dateTime like ''$DATE%'' order by dateTime"' using 1:2 title "Schuppen String2" with lines, \
+'< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc2u*dc2i from single_measures where dateTime like ''$DAYBEFORE%'' order by dateTime"' using 1:2 title "Vortag" with lines
 GNUPLOT
