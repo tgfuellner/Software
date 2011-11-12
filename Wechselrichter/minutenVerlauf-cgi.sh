@@ -33,5 +33,5 @@ set format x "%H:%M"
 set xtics 1800
 plot '< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc1u*dc1i from single_measures where dateTime like ''$DATE%'' order by dateTime"' using 1:2 title "Garage String1" with lines, \
 '< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc2u*dc2i from single_measures where dateTime like ''$DATE%'' order by dateTime"' using 1:2 title "Schuppen String2" with lines, \
-'< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc2u*dc2i from single_measures where dateTime like ''$DAYBEFORE%'' order by dateTime"' using 1:2 title "Vortag" with lines
+'< sqlite3 $DB "select strftime(''%H:%M'',dateTime),dc2u*dc2i from single_measures where dateTime like ''$DAYBEFORE%'' order by dateTime"' using 1:2 lt rgb "gray" title "Vortag" with lines
 GNUPLOT

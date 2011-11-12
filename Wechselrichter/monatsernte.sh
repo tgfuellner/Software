@@ -27,4 +27,4 @@ GNUPLOT
 # Wenn nur ein Jahr gewünscht:
 # where a.m+0 = b.m+1 and a.month like ''2009%''\
 
-open monatsernte.pdf
+evince monatsernte.pdf

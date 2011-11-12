@@ -35,4 +35,4 @@ set xtics 1800
 $plot
 GNUPLOT
 
-open ueberLagertMinutenVerlauf.pdf
+evince ueberLagertMinutenVerlauf.pdf
