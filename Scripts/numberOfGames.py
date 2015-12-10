@@ -5,7 +5,7 @@ import urllib.request as urllib2
 from http.cookiejar import CookieJar
 
 username = 'tgfuellner'
-password = 'bausteln'
+password = '*'
 
 spieler_clickId = {
   'Josef Moser': 1033954,
@@ -44,27 +44,39 @@ spieler_clickId = {
 cj = CookieJar()
 opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
 login_data = urllib.parse.urlencode({'userNameB' : username, 'userPassWordB' : password})
+opener.open('https://www.mytischtennis.de/community/login', login_data.encode(encoding='UTF-8'))
+allUrl = 'https://www.mytischtennis.de/community/matches?timeInterval=all&matchType=all&statisticType=all&clickttid={}'
 
 
-pattern = re.compile(b'Alle Spiele \((\d+)\)')
+reAll = re.compile(b'Alle Spiele \((\d+)\)')
+reSiege = re.compile(b'Siege \((\d+)\)')
+reNiederlagen = re.compile(b'Niederlagen \((\d+)\)')
+
+def extract(url):
+  resp = opener.open(url)
+  html = resp.read()
+  matchAll = reAll.search(html)
+  matchSiege = reSiege.search(html)
+  matchNiederlagen = reNiederlagen.search(html)
+
+  return (matchAll, matchSiege, matchNiederlagen)
+
 
 def getNumberOfPlayedGames(clickId):
-  opener.open('https://www.mytischtennis.de/community/login', login_data.encode(encoding='UTF-8'))
+  url = allUrl.format(clickId)
+  matchAll, siege, niederlagen = extract(url)
 
-  allUrl = 'https://www.mytischtennis.de/community/matches?timeInterval=all&matchType=all&statisticType=all&clickttid={}'
-  allUrl = allUrl.format(clickId)
-  resp = opener.open(allUrl)
-  match = pattern.search(resp.read())
-
-  if not match:
+  if not matchAll:
     time.sleep(5)
-    resp = opener.open(allUrl)
-    match = pattern.search(resp.read())
+    matchAll, siege, niederlagen = extract(url)
     
-
-  return int(match.group(1))
-
+  return (int(matchAll.group(1)), int(siege.group(1)), int(niederlagen.group(1)))
 
 
+
+print('Sieg Verhältnis, Gesamt, Siege, Niederlagen, Name')
 for name, id in spieler_clickId.items():
-  print(getNumberOfPlayedGames(id), name)
+  alle, siege, niederlagen = getNumberOfPlayedGames(id)
+  print('{siegVerlust:.2f},{alle},{siege},{niederlagen},{name}'.format(
+        name=name, alle=alle, siege=siege,
+        siegVerlust=siege/niederlagen, niederlagen=niederlagen))
