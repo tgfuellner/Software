@@ -74,7 +74,7 @@ def getNumberOfPlayedGames(clickId):
 
 
 
-print('Sieg Verhältnis, Gesamt, Siege, Niederlagen, Name')
+print('Sieg Verhältnis; Gesamt; Siege; Niederlagen; Name')
 for name, id in spieler_clickId.items():
   alle, siege, niederlagen = getNumberOfPlayedGames(id)
   print('{siegVerlust:.2f};{alle};{siege};{niederlagen};{name}'.format(
