@@ -2,7 +2,7 @@
 #
 
 #DB=/home/thomas/PV/singlePV.db
-DB=/mnt/sd/PV/singlePV.db
+DB=/home/pi/PV/singlePV.db
 
 DATE=${1:-$(date  "+%Y-%m-%d")}
 DAYBEFORE=$(date "+%Y-%m-%d" --date "$DATE - 1 day")
@@ -20,7 +20,11 @@ echo "<a href=\"hist.sh?$NEXTDAY\"> ---></a>"
 
 echo "<p><a href=\"ueberLagertMinutenVerlauf-cgi.sh?$DAYBEFORE\">Vergleich</a>"
 
-echo "<p>Tagesernete: <a href=\"tagesernte-cgi.sh\">Alles</a>&nbsp;&nbsp;"
+echo "<p>Tagesernete: <a href=\"jahresvergleich-cgi.sh\">Alles</a>&nbsp;&nbsp;"
+echo "<a href=\"tagesernte-cgi.sh?2016\">2016</a>&nbsp;&nbsp;"
+echo "<a href=\"tagesernte-cgi.sh?2015\">2015</a>&nbsp;&nbsp;"
+echo "<a href=\"tagesernte-cgi.sh?2014\">2014</a>&nbsp;&nbsp;"
+echo "<a href=\"tagesernte-cgi.sh?2013\">2013</a>&nbsp;&nbsp;"
 echo "<a href=\"tagesernte-cgi.sh?2012\">2012</a>&nbsp;&nbsp;"
 echo "<a href=\"tagesernte-cgi.sh?2011\">2011</a>&nbsp;&nbsp;"
 echo "<a href=\"tagesernte-cgi.sh?2010\">2010</a>&nbsp;&nbsp;"
