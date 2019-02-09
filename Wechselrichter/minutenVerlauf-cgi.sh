@@ -2,7 +2,7 @@
 #
 
 #DB=/home/thomas/PV/singlePV.db
-DB=/mnt/sd/PV/singlePV.db
+DB=/home/pi/PV/singlePV.db
 
 DATE=${1:-$(date  "+%Y-%m-%d")}
 DATEHM=${1:-$(date  "+%Y-%m-%d %H:%M:%S")}
@@ -15,19 +15,19 @@ CASH=$(echo $GESAMT*0.43|bc)
 echo "Content-type: image/png";echo
 
 gnuplot <<GNUPLOT
-set title "DC Power am $DATEHM ($SAMPLES single measures)"
+set title "DC Power am $DATEHM ($SAMPLES measures)"
 set label "Tagesenergie: ${GESAMT}kWh \n(EUR $CASH)" at graph 0.03,0.95
 set ylabel "Leistung in Watt"
 set datafile separator "|"
 set style data histograms
 #set style data boxes
-set terminal png size 800,400 enhanced transparent
+set terminal png font arial 10 size 900,500 enhanced transparent
 set xtics rotate by 90
 set grid 
 set style fill
 set output
 set xdata time
-set timefmt x "%H:%M"
+set timefmt "%H:%M"
 set format x "%H:%M"
 #set xrange ["11:50":"12:00"]
 set xtics 1800

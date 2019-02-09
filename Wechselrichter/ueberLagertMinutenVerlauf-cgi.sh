@@ -3,7 +3,7 @@
 # Zeigt Tagesverlauf der AC Leistung.
 # Parameter: 2009-07-30 2009-08-02
 
-DB=/home/thomas/toms-repo/Software/Wechselrichter/wechselrichter.db
+DB=/home/pi/PV/wechselrichter.db
 
 echo "Content-type: image/png";echo
 
@@ -27,13 +27,13 @@ set title "AC Power $DATES"
 set ylabel "Leistung in Watt"
 set datafile separator "|"
 set style data histograms
-set terminal png size 1000,600 enhanced transparent
+set terminal png size 1000,600 enhanced
 set xtics rotate by 90
 set grid 
 set style fill
 set output
 set xdata time
-set timefmt x "%H:%M"
+set timefmt "%H:%M"
 set format x "%H:%M"
 set xtics 1800
 $plot

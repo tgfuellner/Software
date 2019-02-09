@@ -20,7 +20,9 @@ echo "<a href=\"hist.sh?$NEXTDAY\"> ---></a>"
 
 echo "<p><a href=\"ueberLagertMinutenVerlauf-cgi.sh?$DAYBEFORE\">Vergleich</a>"
 
-echo "<p>Tagesernete: <a href=\"jahresvergleich-cgi.sh\">Alles</a>&nbsp;&nbsp;"
+echo "<p>Tagesernete: <a href=\"tagesernte-cgi.sh\">Alles</a>&nbsp;&nbsp;"
+echo "<a href=\"tagesernte-cgi.sh?2018\">2018</a>&nbsp;&nbsp;"
+echo "<a href=\"tagesernte-cgi.sh?2017\">2017</a>&nbsp;&nbsp;"
 echo "<a href=\"tagesernte-cgi.sh?2016\">2016</a>&nbsp;&nbsp;"
 echo "<a href=\"tagesernte-cgi.sh?2015\">2015</a>&nbsp;&nbsp;"
 echo "<a href=\"tagesernte-cgi.sh?2014\">2014</a>&nbsp;&nbsp;"

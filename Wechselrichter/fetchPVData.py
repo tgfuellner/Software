@@ -1,4 +1,4 @@
-#!/opt/local/bin/python
+#!/usr/bin/python2
 
 import urllib
 from datetime import datetime
@@ -8,7 +8,7 @@ from pysqlite2 import dbapi2 as sqlite
 # Messwerte pro Zeile im Logfile
 NR_OF_MEASURES = 42
 
-connection = sqlite.connect('/home/thomas/toms-repo/Software/Wechselrichter/wechselrichter.db')
+connection = sqlite.connect('/home/pi/PV/wechselrichter.db')
 cursor = connection.cursor()
 
 # ------------------------------------------------

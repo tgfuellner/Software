@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 
-DB=/home/thomas/toms-repo/Software/Wechselrichter/wechselrichter.db
+DB=/home/pi/PV/wechselrichter.db
 YEAR=${1:-20}
 YEAR_BEFORE=$[$YEAR-1]
 
@@ -19,7 +19,7 @@ set title "Tagesernte"
 set ylabel "Leistung in kWh"
 set datafile separator "|"
 set style data histograms
-set terminal png size 1000,600 enhanced transparent
+set terminal png size 1000,600 enhanced
 #set grid 
 set style fill
 set output

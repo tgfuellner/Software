@@ -1,4 +1,4 @@
-#!/opt/local/bin/python
+#!/usr/bin/python
 
 import urllib
 import time
@@ -126,7 +126,7 @@ parser.add_option("-m", "--html",
                   action="store_true", dest="html", default=True,
                   help="Markup Values in HTML format")
 parser.add_option("-d", "--database", dest="DataBase",
-                  type="string", default="/mnt/sd/PV/singlePV.db",
+                  type="string", default="/home/pi/PV/singlePV.db",
                   help="Store data fom the Wechselrichter to database", metavar="database")
 
 (options, args) = parser.parse_args()
